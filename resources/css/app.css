@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#musicList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.music-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.music-item:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.music-details {
+    flex-grow: 1;
+}
+
+.music-actions {
+    margin-left: 20px;
+}
+
+.music-actions button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.music-actions button:hover {
+    background-color: #0056b3;
+}
+
+.music-actions .deleteBtn {
+    background-color: #c9003c;
+}
+.music-actions .deleteBtn:hover  {
+    background-color: #9e002f;
+}
