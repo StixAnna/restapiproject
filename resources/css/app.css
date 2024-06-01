@@ -52,10 +52,109 @@ h1 {
 .music-actions button:hover {
     background-color: #0056b3;
 }
-
 .music-actions .deleteBtn {
     background-color: #c9003c;
 }
 .music-actions .deleteBtn:hover  {
     background-color: #9e002f;
+}
+.redirect-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.redirect-button:hover {
+    background-color: #0056b3;
+}
+
+.redirect-button:active {
+    background-color: #003f7f;
+}
+
+.redirect-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+
+.upload-form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.upload-form-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.upload-form-container input[type="file"] {
+    display: none;
+}
+
+.upload-form-container label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-form-container label:hover {
+    background-color: #0056b3;
+}
+
+.upload-form-container label:active {
+    background-color: #003f7f;
+}
+
+.upload-form-container label:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.upload-form-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.upload-form-container button:hover {
+    background-color: #218838;
+}
+
+.upload-form-container button:active {
+    background-color: #1e7e34;
+}
+
+.upload-form-container button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.5);
 }

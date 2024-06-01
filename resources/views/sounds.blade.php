@@ -9,6 +9,7 @@
     @vite(['resources/css/app.css'])
 </head>
 <body>
+    <a class="redirect-button" href="/upload">Upload Page</a><br>
     <h1>Music List</h1>
     <ul id="musicList"></ul>
 
@@ -105,7 +106,6 @@
 
         // Функция для удаления файла
         function deleteFile(music) {
-            console.log(music.id)
             fetch('{{ route('file.destroy', '') }}/' + music.id, {
 
                 method: 'DELETE',

@@ -10,17 +10,27 @@
     @vite(['resources/css/app.css'])
 </head>
 <body>
+    <a class="redirect-button" href="/sounds">Music List Page</a><br>
     <h1>Upload Page</h1>
-    <form id="uploadForm" method="POST" enctype="multipart/form-data">
+    <form id="uploadForm" class="upload-form-container" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="file"
-        {{-- accept="image/*,.png,.jpg,.gif,.web" --}}
-        accept="audio/*"
-        required>
+        <input type="file" name="file" id="fileInput" accept="audio/*" required><br>
+        <label id="fileLabel" for="fileInput">Choose File</label><br>
         <button type="submit">Upload</button>
     </form>
 
     <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                fileLabel.textContent = fileInput.files[0].name; // Отображение имени выбранного файла
+            } else {
+                fileLabel.textContent = 'Choose File';
+            }
+        });
+
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             let formData = new FormData(this);
