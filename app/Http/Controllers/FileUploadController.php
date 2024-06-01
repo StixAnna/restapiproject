@@ -7,6 +7,7 @@ use App\Models\Sound;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use getID3;
 
 class FileUploadController extends Controller
 {
@@ -28,12 +29,22 @@ class FileUploadController extends Controller
         $size = $file->getSize();
 
         // Сохранение файла в директорию sounds
-        $path = $file->store('sounds');
+        $filePath = $file->store('sounds');
+        $storagefilePath = Storage::path($filePath);
+        // Log::info($storagefilePath);
 
-        $sound = Sound::create([
+        $getID3 = new getID3;
+        $fileInfo = $getID3->analyze($storagefilePath);
+        $duration = round($fileInfo['playtime_seconds']);
+        $minutes = floor($duration / 60);
+        $seconds = floor($duration % 60);
+        $durationFormatted = sprintf('%d:%02d', $minutes, $seconds);
+
+        Sound::create([
             'fname' => $originalName,
             'fsize' => $size,
-            'fpath' => $path
+            'fpath' => $filePath,
+            'fduration' => $durationFormatted
         ]);
 
         // // Invalidate the cache since new data is added
@@ -42,15 +53,16 @@ class FileUploadController extends Controller
         return response()->json([
             'message' => 'File uploaded successfully',
             'file_name' => $originalName,
-            'file_size' => $size,
-            'file_path' => $path
+            // 'file_size' => $size,
+            // 'file_path' => $filePath,
+            // 'fduration' => $durationFormatted
         ], 201);
     }
 
     public function destroy(Sound $sound)
     {
         $filePath = 'sounds/' . basename($sound->fpath);
-        Log::info($filePath);
+        // Log::info($filePath);
         if (Storage::delete($filePath)) {
             $sound->delete();
             // Invalidate the cache since data is deleted
@@ -61,8 +73,6 @@ class FileUploadController extends Controller
         }
 
     }
-
-
 
 
 }

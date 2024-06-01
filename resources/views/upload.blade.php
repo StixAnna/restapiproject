@@ -54,6 +54,7 @@
                     console.error('Error:', data.error);
                 } else {
                     console.log(data);
+                    location.reload();
                 }
             })
             .catch(error => {

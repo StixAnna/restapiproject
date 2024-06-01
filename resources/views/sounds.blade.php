@@ -61,7 +61,7 @@
         function createMusicDetailsElement(music) {
             const musicDetails = document.createElement('div');
             musicDetails.className = 'music-details';
-            musicDetails.textContent = `${music.fname} (${(music.fsize / 1024).toFixed(2)} KB) - Path: ${music.fpath}`;
+            musicDetails.textContent = `${music.fname} (${(music.fsize / 1024).toFixed(2)} KB) - Duration: ${music.fduration} minutes`;
             return musicDetails;
         }
 
@@ -98,6 +98,8 @@
         function downloadMusic(filePath, fileName) {
             const link = document.createElement('a');
             link.href = filePath;
+            console.log(filePath);
+            console.log(fileName);
             link.download = fileName; // Использование переданного имени файла для загрузки
             document.body.appendChild(link);
             link.click();
@@ -115,12 +117,9 @@
                 }
             })
             .then(response => {
-                if (response.ok) {
-                    // File deleted successfully
-                    console.log('File deleted successfully');
+                if (response.ok) {// File deleted successfully
                     fetchMusicList(); // Refresh the music list
-                } else {
-                    // Error occurred while deleting the file
+                } else {// Error occurred while deleting the file
                     console.error('Error: Unable to delete the file');
                 }
             })

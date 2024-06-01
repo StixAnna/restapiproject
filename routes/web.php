@@ -15,8 +15,6 @@ Route::get('/sounds', function () {
     return view('sounds');
 });
 
-// Route::post('/api/sounds/upload', [FileUploadController::class, 'upload'])->name('file.upload');
-// Route::post('/upload', [FileUploadController::class, 'upload'])->name('file.upload');
 
 
 
