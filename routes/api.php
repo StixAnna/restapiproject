@@ -26,7 +26,6 @@ Route::post('/api/sounds/upload', [FileUploadController::class, 'upload'])->name
 Route::get('/sounds', [SoundController::class, 'index'])->name('sounds.show');
 Route::post('/sounds', [SoundController::class, 'store']);
 Route::get('/sounds/{sound}', [SoundController::class, 'show']);
-// Route::put('/sounds/{sound}', [SoundController::class, 'update']);
 Route::delete('/sounds/{sound}', [FileUploadController::class, 'destroy'])->name('file.destroy');
 
 

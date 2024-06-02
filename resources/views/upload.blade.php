@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Upload</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
     @vite(['resources/css/app.css'])
 </head>
 <body>
-    <a class="redirect-button" href="/sounds">Music List Page</a><br>
+    <div class="wrapper">
     <h1>Upload Page</h1>
     <form id="uploadForm" class="upload-form-container" method="POST" enctype="multipart/form-data">
         @csrf
@@ -63,5 +63,7 @@
             });
         });
     </script>
+    </div>
+</x-app-layout>
 </body>
 </html>
