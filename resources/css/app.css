@@ -54,6 +54,7 @@ h1 {
 }
 .music-actions .deleteBtn {
     background-color: #c9003c;
+    margin-left: 10px;
 }
 .music-actions .deleteBtn:hover  {
     background-color: #9e002f;

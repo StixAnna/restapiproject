@@ -11,115 +11,47 @@
 <body>
     <a class="redirect-button" href="/upload">Upload Page</a><br>
     <h1>Music List</h1>
-    <ul id="musicList"></ul>
+    <ul id="musicList">
+        <?php
+        // Получение списка музыки из базы данных
+        $musicList = App\Models\Sound::all();
+        foreach ($musicList as $music) {
+
+            // Отображение элементов списка
+            echo
+            "<li class='music-item'>
+                <div class='music-details'>{$music->fname} (" . number_format($music->fsize / 1024, 2) . " KB) - Duration: {$music->fduration} minutes</div>
+                <div class='music-actions'>
+                    <button onclick=\"downloadMusic('{$music->fpath}', '{$music->fname}')\">Download</button>
+                    <button class='deleteBtn' onclick=\"deleteFile({$music->id}, '{$music->fpath}')\">Delete</button>
+                </div>
+            </li>";
+        }
+        ?>
+    </ul>
 
     <script>
-        // URL вашего API
-        const apiUrl = '{{ route('sounds.show') }}';
-
-        // Функция для получения списка музыки
-        async function fetchMusicList() {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                const data = await response.json();
-                displayMusicList(data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        // Функция для отображения списка музыки
-        function displayMusicList(musicList) {
-            const musicListElement = document.getElementById('musicList');
-            musicListElement.innerHTML = ''; // Очистка предыдущего списка
-
-            // Создание HTML-элементов для каждого музыкального файла
-            musicList.forEach(music => {
-                const listItem = createListItem(music);
-                musicListElement.appendChild(listItem);
-            });
-        }
-
-        // Создание элемента списка для музыки
-        function createListItem(music) {
-            const listItem = document.createElement('li');
-            listItem.className = 'music-item';
-
-            const musicDetails = createMusicDetailsElement(music);
-            const musicActions = createMusicActionsElement(music);
-
-            listItem.appendChild(musicDetails);
-            listItem.appendChild(musicActions);
-
-            return listItem;
-        }
-
-        // Создание элемента с информацией о музыке
-        function createMusicDetailsElement(music) {
-            const musicDetails = document.createElement('div');
-            musicDetails.className = 'music-details';
-            musicDetails.textContent = `${music.fname} (${(music.fsize / 1024).toFixed(2)} KB) - Duration: ${music.fduration} minutes`;
-            return musicDetails;
-        }
-
-        // Создание элемента с действиями для музыки (кнопки Download и Delete)
-        function createMusicActionsElement(music) {
-            const musicActions = document.createElement('div');
-            musicActions.className = 'music-actions';
-
-            const downloadButton = createButton('Download', () => {
-                downloadMusic(music.fpath, music.fname);
-            });
-
-            const deleteButton = createButton('Delete', () => {
-                deleteFile(music);
-            });
-            deleteButton.style.marginLeft = '10px';
-            deleteButton.className = 'deleteBtn';
-
-            musicActions.appendChild(downloadButton);
-            musicActions.appendChild(deleteButton);
-
-            return musicActions;
-        }
-
-        // Создание кнопки
-        function createButton(text, onClick) {
-            const button = document.createElement('button');
-            button.textContent = text;
-            button.addEventListener('click', onClick);
-            return button;
-        }
-
-        // Функция для загрузки музыки
         function downloadMusic(filePath, fileName) {
             const link = document.createElement('a');
             link.href = filePath;
-            console.log(filePath);
-            console.log(fileName);
-            link.download = fileName; // Использование переданного имени файла для загрузки
+            link.download = fileName;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
 
-        // Функция для удаления файла
-        function deleteFile(music) {
-            fetch('{{ route('file.destroy', '') }}/' + music.id, {
-
+        function deleteFile(id, filePath) {
+            fetch(`{{ route('file.destroy', '') }}/${id}`, {
                 method: 'DELETE',
-                body: JSON.stringify({ 'id': music.id, 'filePath': music.fpath }), // Send file path to server
+                body: JSON.stringify({ id: id, filePath: filePath }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
             .then(response => {
-                if (response.ok) {// File deleted successfully
-                    fetchMusicList(); // Refresh the music list
-                } else {// Error occurred while deleting the file
+                if (response.ok) {
+                    location.reload(); // Перезагрузка страницы после успешного удаления
+                } else {
                     console.error('Error: Unable to delete the file');
                 }
             })
@@ -127,9 +59,6 @@
                 console.error('Error:', error);
             });
         }
-
-        // Вызов функции для получения и отображения списка при загрузке страницы
-        document.addEventListener('DOMContentLoaded', fetchMusicList);
     </script>
 </body>
 </html>
