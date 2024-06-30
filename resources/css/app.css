@@ -167,3 +167,15 @@ h1 {
     box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.5);
 }
 
+#tagchoose {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22%23333%22 d%3D%22M2 0L0 2h4zm0 5L0 3h4z%22/%3E%3C/svg%3E') no-repeat right 10px center;
+    background-size: 10px 5px;
+}

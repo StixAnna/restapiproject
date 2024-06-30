@@ -19,6 +19,7 @@ class FileUploadController extends Controller
         }
 
         $file = $request->file('file');
+        $soundtag = $request->input('stag');
 
         // Проверка корректности файла
         if (!$file->isValid()) {
@@ -44,7 +45,8 @@ class FileUploadController extends Controller
             'fname' => $originalName,
             'fsize' => $size,
             'fpath' => $filePath,
-            'fduration' => $durationFormatted
+            'fduration' => $durationFormatted,
+            'stag' => $soundtag,
         ]);
 
         // // Invalidate the cache since new data is added

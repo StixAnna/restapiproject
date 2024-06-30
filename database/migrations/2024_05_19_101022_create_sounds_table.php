@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('fsize');
             $table->string('fpath');
             $table->string('fduration');
+            $table->string('stag');
             $table->timestamps();
         });
     }

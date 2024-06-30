@@ -10,5 +10,5 @@ class Sound extends Model
     use HasFactory;
 
     // add fileName, fileSize, fpath
-    protected $fillable = ['fname', 'fsize', 'fpath', 'fduration'];
+    protected $fillable = ['fname', 'fsize', 'fpath', 'fduration', 'stag'];
 }

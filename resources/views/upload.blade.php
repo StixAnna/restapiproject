@@ -16,6 +16,12 @@
         @csrf
         <input type="file" name="file" id="fileInput" accept="audio/*" required><br>
         <label id="fileLabel" for="fileInput">Choose File</label><br>
+        <select id='tagchoose' name="stag">
+            <option value="phonk">phonk</option>
+            <option value="rock">rock</option>
+            <option value="classic">classic</option>
+        </select><br>
+
         <button type="submit">Upload</button>
     </form>
 
